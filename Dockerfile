@@ -14,9 +14,9 @@ ENV PATH="${VIRTUAL_ENV}/bin:${PATH}"
 COPY .requirements.txt .
 
 RUN python3 -m venv ${VIRTUAL_ENV} \
-  && pip install -r .requirements.txt 
+  && pip install -r .requirements.txt
 
-COPY main.py .
+COPY src .
 
 ENTRYPOINT gunicorn \
   -b 0.0.0.0:8000 \
