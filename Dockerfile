@@ -16,6 +16,7 @@ COPY .requirements.txt .
 RUN python3 -m venv ${VIRTUAL_ENV} \
   && pip install -r .requirements.txt
 
+COPY favicon.ico .
 COPY src .
 
 ENTRYPOINT gunicorn \
@@ -24,4 +25,5 @@ ENTRYPOINT gunicorn \
   -w 4 \
   --access-logfile "$ACCESS_LOG" \
   --error-logfile "$ERROR_LOG" \
+  --forwarded-allow-ips="*" \
   main:app
